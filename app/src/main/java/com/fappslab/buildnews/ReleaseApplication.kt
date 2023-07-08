@@ -1,6 +1,7 @@
 package com.fappslab.buildnews
 
 import android.app.Application
+import com.fappslab.buildnews.di.AppModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -30,6 +31,6 @@ open class ReleaseApplication : Application() {
     }
 
     private fun koinLoad() {
-        // TODO setup Koin modules
+        AppModule.load()
     }
 }
