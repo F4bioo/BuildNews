@@ -1,5 +1,9 @@
 ext.flavorConfig = {
 
+    def keyApiPropertiesFile = rootProject.file("$rootDir/keyApi.properties")
+    def keyApiProperties = new Properties()
+    keyApiProperties.load(new FileInputStream(keyApiPropertiesFile))
+
     flavorDimensions "app"
     productFlavors {
         newsapi {
@@ -7,12 +11,14 @@ ext.flavorConfig = {
             ext.appIdSuffix = '.newsapi'
             manifestPlaceholders = [appName: "News API"]
             buildConfigField 'String', 'BASE_URL', '"https://www.google.com/"'
+            buildConfigField "String", "API_KEY", keyApiProperties['NEWS_API_KEY']
         }
         nytimesapi {
             dimension "app"
             ext.appIdSuffix = '.nytimesapi'
             manifestPlaceholders = [appName: "The New York Times API"]
             buildConfigField 'String', 'BASE_URL', '"https://www.google.com/"'
+            buildConfigField "String", "API_KEY", keyApiProperties['NY_TIMES_API_KEY']
         }
     }
 

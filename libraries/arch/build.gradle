@@ -10,9 +10,9 @@ android {
 
 dependencies {
     // Libs
-    implementation(Libs.okhttpLoggingInterceptor)
-    implementation(Libs.retrofitConverterGson)
+    api(Libs.retrofitConverterGson)
     implementation(Libs.okhttp)
+    implementation(Libs.okhttpLoggingInterceptor)
     implementation(TestLibs.coroutinesTest)
     implementation(TestLibs.junitTest)
     implementation(TestLibs.mockWebserverTest)

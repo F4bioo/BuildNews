@@ -1,8 +1,9 @@
-package com.fappslab.buildnews.libraries.arch.network.client
+package com.fappslab.buildnews.data.network.retrofit
 
+import com.fappslab.buildnews.libraries.arch.network.client.HttpClient
 import retrofit2.Retrofit
 
-internal class HttpClientImpl(
+class HttpClientImpl(
     private val retrofit: Retrofit
 ) : HttpClient {
 

@@ -1,4 +1,4 @@
-package com.fappslab.buildnews.libraries.arch.network.retrofit
+package com.fappslab.buildnews.data.network.retrofit
 
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
