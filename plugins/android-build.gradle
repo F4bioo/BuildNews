@@ -1,5 +1,7 @@
 apply plugin: 'kotlin-parcelize'
 
+apply from: "$rootDir/plugins/test-build.gradle"
+
 android {
     compileSdk Config.compileSdk
 
