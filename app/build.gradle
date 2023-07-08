@@ -2,30 +2,47 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
 }
+apply from: "$rootDir/plugins/android-build.gradle"
+apply from: "$rootDir/plugins/flavor-build.gradle"
 
 android {
-    namespace 'com.fappslab.buildnews'
-    compileSdk 33
+    namespace Config.namespace
 
-    defaultConfig {
-        applicationId "com.fappslab.buildnews"
-        minSdk 28
-        targetSdk 33
-        versionCode 1
-        versionName "1.0"
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-    }
-
-    buildTypes {
+    signingConfigs {
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            // Implements keyStore for release version
         }
     }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+
+    defaultConfig {
+        applicationId Config.applicationId
+        versionCode Config.versionCode
+        versionName Config.versionName
+    }
+
+    with flavorConfig
+
+    buildTypes {
+        debug {
+            debuggable true
+            applicationIdSuffix '.debug'
+        }
+        preprod {
+            initWith debug
+            minifyEnabled true
+            applicationIdSuffix '.preprod'
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'),
+                    "$rootDir/app/proguard-rules.pro",
+                    "$rootDir/app/proguard-rules-preprod.pro"
+        }
+        release {
+            minifyEnabled true
+            shrinkResources true
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'),
+                    "$rootDir/app/proguard-rules.pro",
+                    "$rootDir/app/proguard-rules-preprod.pro"
+        }
     }
     kotlinOptions {
         jvmTarget = '1.8'
@@ -33,12 +50,6 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.core:core-ktx:1.8.0'
-    implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.5.0'
+    // Modules
 
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 }
