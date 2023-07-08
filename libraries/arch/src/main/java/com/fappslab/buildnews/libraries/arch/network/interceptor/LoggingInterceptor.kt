@@ -1,9 +1,9 @@
 package com.fappslab.buildnews.libraries.arch.network.interceptor
 
+import com.fappslab.buildnews.libraries.arch.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
-import org.koin.android.BuildConfig
 import timber.log.Timber
 
 private const val TAG = "OkHttp"
@@ -20,4 +20,3 @@ class LoggingInterceptor : Interceptor {
         return httpLoggingInterceptor.intercept(chain)
     }
 }
-// com.fappslab.buildnews

@@ -1,9 +1,9 @@
-package com.fappslab.buildnews
+package com.fappslab.buildnews.presentation
 
 import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.fappslab.bookshelf.R
+import com.fappslab.buildnews.R
 
 
 class MainActivity : AppCompatActivity() {

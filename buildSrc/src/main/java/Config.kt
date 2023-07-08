@@ -1,5 +1,5 @@
 object Config {
-    private const val packageName = "com.fappslab.bookshelf"
+    private const val packageName = "com.fappslab.buildnews"
     const val namespace = packageName
     const val compileSdk = 33
     const val applicationId = packageName
