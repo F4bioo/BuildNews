@@ -13,4 +13,6 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "BuildNews"
-include ':app'
+// keep in alphabetical order
+include ':app',
+        ':libraries:arch'

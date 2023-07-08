@@ -52,7 +52,7 @@ android {
         jvmTarget = '1.8'
     }
     tasks.withType(Detekt).configureEach { detekt ->
-        reports {
+        detekt.reports {
             xml.required.set(false)
             html.required.set(true)
             txt.required.set(false)
@@ -64,5 +64,5 @@ android {
 
 dependencies {
     // Modules
-
+    implementation project(Modules.arch)
 }
