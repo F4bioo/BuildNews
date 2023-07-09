@@ -1,31 +1,31 @@
 package com.fappslab.buildnews.libraries.arch.network.exception.extension
 
+import com.fappslab.buildnews.libraries.arch.network.exception.ApiError
 import com.fappslab.buildnews.libraries.arch.network.exception.HttpThrowable
 import com.fappslab.buildnews.libraries.arch.network.exception.InternetThrowable
-import com.fappslab.buildnews.libraries.arch.network.exception.model.ErrorResponse
-import com.google.gson.Gson
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
 import retrofit2.HttpException
 import java.io.IOException
 import java.util.concurrent.TimeoutException
 
 private const val UNEXPECTED_ERROR_MESSAGE = "Unexpected error, please try again."
 
-private fun HttpException.getCause(errorBody: String?): Throwable =
-    getErrorResponse(errorBody).data?.let {
-        HttpThrowable(code = it.code, message = it.message, throwable = this)
+private fun HttpException.parseError(errorParser: (String) -> ApiError): Throwable =
+    response()?.errorBody()?.string()?.let {
+        errorParser(it).toHttpThrowable()
     } ?: HttpThrowable(message = UNEXPECTED_ERROR_MESSAGE, throwable = this)
 
-private fun getErrorResponse(errorBody: String?): ErrorResponse =
-    Gson().fromJson(errorBody, ErrorResponse::class.java)
-
-private fun HttpException.parseError(): Throwable =
-    getCause(errorBody = response()?.errorBody()?.string())
-
-internal fun Throwable.toThrowable(): Throwable =
+private fun Throwable.toThrowable(errorParser: (String) -> ApiError): Throwable =
     when (this) {
-        is HttpException -> parseError()
+        is HttpException -> parseError(errorParser)
         is TimeoutException,
         is IOException -> InternetThrowable()
 
         else -> this
+    }
+
+fun <T> Flow<T>.toHttpErrorParse(errorParser: (String) -> ApiError): Flow<T> =
+    catch { cause ->
+        throw cause.toThrowable(errorParser)
     }
