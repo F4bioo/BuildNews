@@ -2,6 +2,7 @@ package com.fappslab.buildnews
 
 import android.app.Application
 import com.fappslab.buildnews.di.AppModule
+import com.fappslab.buildnews.di.FlavorModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -32,5 +33,6 @@ open class ReleaseApplication : Application() {
 
     private fun koinLoad() {
         AppModule.load()
+        FlavorModule.load()
     }
 }

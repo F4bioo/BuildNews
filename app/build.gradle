@@ -9,6 +9,10 @@ apply from: "$rootDir/plugins/flavor-build.gradle"
 apply from: "$rootDir/config/detekt/detekt-build.gradle"
 apply from: "$rootDir/plugins/jacoco-build.gradle"
 
+def keyApiPropertiesFile = rootProject.file("$rootDir/keyApi.properties")
+def keyApiProperties = new Properties()
+keyApiProperties.load(new FileInputStream(keyApiPropertiesFile))
+
 android {
     namespace Config.namespace
 
@@ -25,6 +29,16 @@ android {
     }
 
     with flavorConfig
+    productFlavors {
+        newsapi {
+            buildConfigField 'String', 'BASE_URL', '"https://newsapi.org/"'
+            buildConfigField "String", "API_KEY", keyApiProperties['NEWS_API_KEY']
+        }
+        nytimesapi {
+            buildConfigField 'String', 'BASE_URL', '"https://api.nytimes.com/"'
+            buildConfigField "String", "API_KEY", keyApiProperties['NY_TIMES_API_KEY']
+        }
+    }
 
     buildTypes {
         debug {
@@ -66,4 +80,9 @@ dependencies {
     // Modules
     implementation project(Modules.arch)
     implementation project(Modules.design)
+    implementation project(Modules.common)
+
+    // Flavors
+    newsapiImplementation project(Modules.newsApi)
+    nytimesapiImplementation project(Modules.nyTimesApi)
 }

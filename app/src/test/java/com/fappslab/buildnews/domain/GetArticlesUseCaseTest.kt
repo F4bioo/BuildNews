@@ -1,9 +1,9 @@
 package com.fappslab.buildnews.domain
 
 import app.cash.turbine.test
-import com.fappslab.buildnews.domain.model.Articles
-import com.fappslab.buildnews.domain.repository.BuildNewsRepository
-import com.fappslab.buildnews.domain.usecase.GetArticlesUseCase
+import com.fappslab.buildnews.common.domain.model.Articles
+import com.fappslab.buildnews.common.domain.repository.BuildNewsRepository
+import com.fappslab.buildnews.common.domain.usecase.GetArticlesUseCase
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
