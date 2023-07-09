@@ -15,5 +15,8 @@ dependencyResolutionManagement {
 rootProject.name = "BuildNews"
 // keep in alphabetical order
 include ':app',
+        ':common',
+        ':flavors:newsapi',
+        ':flavors:nytimesapi',
         ':libraries:arch',
         ':libraries:design'

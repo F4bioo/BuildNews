@@ -1,5 +1,7 @@
 package com.fappslab.buildnews.domain.model
 
+import com.fappslab.buildnews.common.domain.model.Articles
+
 data class NewsArticles(
     val articles: List<NewsApiArticle>
 ) : Articles {
