@@ -1,0 +1,23 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+}
+apply from: "$rootDir/plugins/android-build.gradle"
+
+android {
+    namespace Config.namespace
+
+    flavorDimensions "app"
+    productFlavors {
+        nytimesapi {
+            dimension "app"
+        }
+    }
+}
+
+dependencies {
+    // Modules
+    implementation project(Modules.arch)
+    implementation project(Modules.design)
+    implementation project(Modules.common)
+}

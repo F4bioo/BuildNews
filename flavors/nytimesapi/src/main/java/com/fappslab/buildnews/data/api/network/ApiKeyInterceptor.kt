@@ -1,10 +1,10 @@
-package com.fappslab.buildnews.libraries.arch.network.interceptor
+package com.fappslab.buildnews.data.api.network
 
 import okhttp3.Interceptor
 import okhttp3.Response
 import java.io.IOException
 
-private const val KEY = "key"
+private const val PATH = "?api-key="
 
 class ApiKeyInterceptor(
     private val apiKey: String
@@ -15,7 +15,7 @@ class ApiKeyInterceptor(
         val request = chain.request()
         val requestUrl = request.url
         val newUrl = requestUrl.newBuilder()
-            .addQueryParameter(KEY, apiKey)
+            .addPathSegment("$PATH$apiKey")
             .build()
 
         return chain.proceed(

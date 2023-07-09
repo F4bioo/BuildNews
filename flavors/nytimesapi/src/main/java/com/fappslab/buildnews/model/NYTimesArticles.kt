@@ -1,4 +1,6 @@
-package com.fappslab.buildnews.domain.model
+package com.fappslab.buildnews.model
+
+import com.fappslab.buildnews.common.domain.model.Articles
 
 data class NYTimesArticles(
     val articles: List<NYTimesArticle>

@@ -1,0 +1,132 @@
+{
+  "status": "OK",
+  "copyright": "Copyright (c) 2023 The New York Times Company.  All Rights Reserved.",
+  "num_results": 20,
+  "results": [
+    {
+      "uri": "nyt://article/b749f2ec-3007-57e7-bc35-6955f58f5cdb",
+      "url": "https://www.nytimes.com/2023/07/06/opinion/robert-kennedy-jr-silicon-valley.html",
+      "id": 100000008984834,
+      "asset_id": 100000008984834,
+      "source": "New York Times",
+      "published_date": "2023-07-06",
+      "updated": "2023-07-07 14:03:09",
+      "section": "Opinion",
+      "subsection": "",
+      "nytdsection": "opinion",
+      "adx_keywords": "Conspiracy Theories;Presidential Election of 2024;Right-Wing Extremism and Alt-Right;High Net Worth Individuals;Computers and the Internet;Kennedy, Robert F Jr;Dorsey, Jack;Musk, Elon",
+      "column": null,
+      "byline": "By Paul Krugman",
+      "type": "Article",
+      "title": "The Rich Are Crazier Than You and Me",
+      "abstract": "Why does Silicon Valley love RFK Jr.?",
+      "des_facet": [
+        "Conspiracy Theories",
+        "Presidential Election of 2024",
+        "Right-Wing Extremism and Alt-Right",
+        "High Net Worth Individuals",
+        "Computers and the Internet"
+      ],
+      "org_facet": [],
+      "per_facet": [
+        "Kennedy, Robert F Jr",
+        "Dorsey, Jack",
+        "Musk, Elon"
+      ],
+      "geo_facet": [],
+      "media": [
+        {
+          "type": "image",
+          "subtype": "photo",
+          "caption": "",
+          "copyright": "H. Armstrong Roberts/ClassicStock, via Getty Images",
+          "approved_for_syndication": 1,
+          "media-metadata": [
+            {
+              "url": "https://static01.nyt.com/images/2023/07/07/opinion/06krugman2/06krugman2-thumbStandard.jpg",
+              "format": "Standard Thumbnail",
+              "height": 75,
+              "width": 75
+            },
+            {
+              "url": "https://static01.nyt.com/images/2023/07/07/opinion/06krugman2/06krugman2-mediumThreeByTwo210.jpg",
+              "format": "mediumThreeByTwo210",
+              "height": 140,
+              "width": 210
+            },
+            {
+              "url": "https://static01.nyt.com/images/2023/07/07/opinion/06krugman2/06krugman2-mediumThreeByTwo440.jpg",
+              "format": "mediumThreeByTwo440",
+              "height": 293,
+              "width": 440
+            }
+          ]
+        }
+      ],
+      "eta_id": 0
+    },
+    {
+      "uri": "nyt://article/9a870403-83e9-5792-83f4-5891a70104cb",
+      "url": "https://www.nytimes.com/2023/07/07/opinion/alumni-affirmative-action-legacy-admissions.html",
+      "id": 100000008982540,
+      "asset_id": 100000008982540,
+      "source": "New York Times",
+      "published_date": "2023-07-07",
+      "updated": "2023-07-08 16:15:47",
+      "section": "Opinion",
+      "subsection": "",
+      "nytdsection": "opinion",
+      "adx_keywords": "Colleges and Universities;Admissions Standards;Affirmative Action;Race and Ethnicity;Minorities;Discrimination;Income Inequality;Nepotism;Ivy League",
+      "column": null,
+      "byline": "By Shamus Khan",
+      "type": "Article",
+      "title": "Legacy Admissions Don’t Work the Way You Think They Do",
+      "abstract": "They are part of the reason less advantaged students get so much out of elite schools.",
+      "des_facet": [
+        "Colleges and Universities",
+        "Admissions Standards",
+        "Affirmative Action",
+        "Race and Ethnicity",
+        "Minorities",
+        "Discrimination",
+        "Income Inequality",
+        "Nepotism"
+      ],
+      "org_facet": [
+        "Ivy League"
+      ],
+      "per_facet": [],
+      "geo_facet": [],
+      "media": [
+        {
+          "type": "image",
+          "subtype": "photo",
+          "caption": "",
+          "copyright": "Tom Moore/Gallery Stock",
+          "approved_for_syndication": 0,
+          "media-metadata": [
+            {
+              "url": "https://static01.nyt.com/images/2023/07/10/opinion/07khan/07khan-thumbStandard.jpg",
+              "format": "Standard Thumbnail",
+              "height": 75,
+              "width": 75
+            },
+            {
+              "url": "https://static01.nyt.com/images/2023/07/10/opinion/07khan/07khan-mediumThreeByTwo210.jpg",
+              "format": "mediumThreeByTwo210",
+              "height": 140,
+              "width": 210
+            },
+            {
+              "url": "https://static01.nyt.com/images/2023/07/10/opinion/07khan/07khan-mediumThreeByTwo440.jpg",
+              "format": "mediumThreeByTwo440",
+              "height": 293,
+              "width": 440
+            }
+          ]
+        }
+      ],
+      "eta_id": 0
+    }
+  ]
+}
