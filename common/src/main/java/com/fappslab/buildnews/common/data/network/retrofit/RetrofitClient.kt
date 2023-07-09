@@ -1,4 +1,4 @@
-package com.fappslab.buildnews.data.network.retrofit
+package com.fappslab.buildnews.common.data.network.retrofit
 
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -10,7 +10,7 @@ private const val READ_TIMEOUT = 15L
 private const val WRITE_TIMEOUT = 10L
 private const val CONNECT_TIMEOUT = 15L
 
-internal class RetrofitClient(
+class RetrofitClient(
     private val baseUrl: String,
     private val interceptors: List<Interceptor>
 ) {

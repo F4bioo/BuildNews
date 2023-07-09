@@ -1,4 +1,4 @@
-package com.fappslab.buildnews.data.network.retrofit
+package com.fappslab.buildnews.common.data.network.retrofit
 
 import com.fappslab.buildnews.libraries.arch.network.client.HttpClient
 import retrofit2.Retrofit

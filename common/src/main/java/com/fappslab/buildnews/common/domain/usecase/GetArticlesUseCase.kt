@@ -1,7 +1,7 @@
-package com.fappslab.buildnews.domain.usecase
+package com.fappslab.buildnews.common.domain.usecase
 
-import com.fappslab.buildnews.domain.model.Articles
-import com.fappslab.buildnews.domain.repository.BuildNewsRepository
+import com.fappslab.buildnews.common.domain.model.Articles
+import com.fappslab.buildnews.common.domain.repository.BuildNewsRepository
 import kotlinx.coroutines.flow.Flow
 
 class GetArticlesUseCase(
