@@ -9,37 +9,20 @@ apply from: "$rootDir/plugins/flavor-build.gradle"
 apply from: "$rootDir/config/detekt/detekt-build.gradle"
 apply from: "$rootDir/plugins/jacoco-build.gradle"
 
-def keyApiPropertiesFile = rootProject.file("$rootDir/keyApi.properties")
-def keyApiProperties = new Properties()
-keyApiProperties.load(new FileInputStream(keyApiPropertiesFile))
-
 android {
     namespace Config.namespace
+    with flavorConfig
 
     signingConfigs {
         release {
             // Implements keyStore for release version
         }
     }
-
     defaultConfig {
         applicationId Config.applicationId
         versionCode Config.versionCode
         versionName Config.versionName
     }
-
-    with flavorConfig
-    productFlavors {
-        newsapi {
-            buildConfigField 'String', 'BASE_URL', '"https://newsapi.org/"'
-            buildConfigField "String", "API_KEY", keyApiProperties['NEWS_API_KEY']
-        }
-        nytimesapi {
-            buildConfigField 'String', 'BASE_URL', '"https://api.nytimes.com/"'
-            buildConfigField "String", "API_KEY", keyApiProperties['NY_TIMES_API_KEY']
-        }
-    }
-
     buildTypes {
         debug {
             debuggable true
@@ -51,7 +34,7 @@ android {
             applicationIdSuffix '.preprod'
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'),
                     "$rootDir/app/proguard-rules.pro",
-                    "$rootDir/app/proguard-rules-preprod.pro"
+                    "$rootDir/app/proguard-rules-staging.pro"
         }
         release {
             minifyEnabled true
@@ -59,7 +42,7 @@ android {
             signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'),
                     "$rootDir/app/proguard-rules.pro",
-                    "$rootDir/app/proguard-rules-preprod.pro"
+                    "$rootDir/app/proguard-rules-staging.pro"
         }
     }
     kotlinOptions {

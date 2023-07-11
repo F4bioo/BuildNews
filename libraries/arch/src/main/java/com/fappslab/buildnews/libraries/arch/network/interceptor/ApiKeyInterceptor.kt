@@ -1,13 +1,12 @@
-package com.fappslab.buildnews.data.api.network
+package com.fappslab.buildnews.libraries.arch.network.interceptor
 
 import okhttp3.Interceptor
 import okhttp3.Response
 import java.io.IOException
 
-private const val QUERY_PARAM = "api-key"
-
 class ApiKeyInterceptor(
-    private val apiKey: String
+    private val queryParam: String,
+    private val apiKey: String,
 ) : Interceptor {
 
     @Throws(IOException::class)
@@ -15,7 +14,7 @@ class ApiKeyInterceptor(
         val request = chain.request()
         val requestUrl = request.url
         val newUrl = requestUrl.newBuilder()
-            .addQueryParameter(QUERY_PARAM, apiKey)
+            .addQueryParameter(queryParam, apiKey)
             .build()
 
         return chain.proceed(
