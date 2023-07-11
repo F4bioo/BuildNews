@@ -1,7 +1,8 @@
-package com.fappslab.buildnews
+package com.fappslab.buildnews.main
 
 import android.app.Application
-import com.fappslab.buildnews.di.AppModule
+import com.fappslab.buildnews.BuildConfig
+import com.fappslab.buildnews.main.di.AppModule
 import com.fappslab.buildnews.di.FlavorModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger

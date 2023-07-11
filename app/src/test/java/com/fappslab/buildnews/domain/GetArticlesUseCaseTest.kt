@@ -1,9 +1,9 @@
 package com.fappslab.buildnews.domain
 
 import app.cash.turbine.test
-import com.fappslab.buildnews.common.domain.model.Articles
 import com.fappslab.buildnews.common.domain.repository.BuildNewsRepository
 import com.fappslab.buildnews.common.domain.usecase.GetArticlesUseCase
+import com.fappslab.buildnews.stub.getArticlesStub
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
@@ -23,7 +23,7 @@ class GetArticlesUseCaseTest {
     @Test
     fun `getArticlesSuccess Should emit articles When use case get success result`() {
         // Given
-        val expectedResult = mockk<Articles>()
+        val expectedResult = getArticlesStub()
         every { repository.getArticles() } returns flowOf(expectedResult)
 
         // When

@@ -2,9 +2,9 @@ package com.fappslab.buildnews.data.repository
 
 import app.cash.turbine.test
 import com.fappslab.buildnews.common.domain.repository.BuildNewsRepository
-import com.fappslab.buildnews.di.AppModule
+import com.fappslab.buildnews.main.di.AppModule
 import com.fappslab.buildnews.di.FlavorModule
-import com.fappslab.buildnews.libraries.arch.rules.RemoteTestRule
+import com.fappslab.buildnews.libraries.arch.rules.RemoteRule
 import com.fappslab.buildnews.stub.getArticlesStub
 import com.fappslab.buildnews.stub.toApiServerFailureResponse
 import com.fappslab.buildnews.stub.toApiServerSuccessResponse
@@ -20,13 +20,14 @@ import kotlin.test.assertEquals
 class BuildNewsRepositoryImplIntegrationTest : KoinTest {
 
     @get:Rule
-    val remoteRule = RemoteTestRule(modules = AppModule.modules + FlavorModule.modules)
+    val remoteRule = RemoteRule(modules = AppModule.modules + FlavorModule.modules)
 
     private val subject: BuildNewsRepository by inject()
 
     @Test
     fun `getArticlesSuccess Should emit articles When repository get success result`() {
         // Given
+        val expectedSize = 2
         val expectedResult = getArticlesStub()
         remoteRule.toApiServerSuccessResponse()
 
@@ -36,7 +37,9 @@ class BuildNewsRepositoryImplIntegrationTest : KoinTest {
         // Then
         runTest {
             result.test {
-                assertEquals(expectedResult, awaitItem())
+                val item = awaitItem()
+                assertEquals(expectedResult, item)
+                assertEquals(expectedSize, item.articles.size)
                 awaitComplete()
             }
         }
