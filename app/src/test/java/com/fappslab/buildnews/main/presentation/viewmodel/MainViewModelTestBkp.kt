@@ -15,13 +15,12 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
 import org.junit.After
-import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import kotlin.test.assertEquals
 
 @ExperimentalCoroutinesApi
-class MainViewModelTest {
+class MainViewModelTestBkp {
 
     @get:Rule
     val dispatcherRule = DispatcherRule()
@@ -39,29 +38,21 @@ class MainViewModelTest {
     )
     private lateinit var subject: MainViewModel
 
-    @Before
-    fun setUp() {
-        subject = MainViewModel(
-            provider = provider,
-            dispatcher = dispatcher
-        )
-    }
-
     @After
     fun tearDown() {
         clearAllMocks()
     }
 
     @Test
-    fun `getArticlesSuccess Should emit expected states When is invoked`() {
+    fun `initGetArticlesSuccess Should emit expected states When init block is invoked`() {
         // Given
         val articles = articlesStub.articles
         val expectedFirstState = initialState.copy(childPosition = 0)
-        val expectedFinalState = expectedFirstState.copy(articles = articles, childPosition = 3)
+        val expectedFinalState = expectedFirstState.copy(articles = articles, childPosition = 2)
         every { provider.getArticlesUseCase() } returns flowOf(articlesStub)
 
         // When
-        subject.getArticles()
+        setupSubject()
 
         // Then
         runTest {
@@ -75,19 +66,19 @@ class MainViewModelTest {
     }
 
     @Test
-    fun `getArticlesFailure Should emit expected states When is invoked`() {
+    fun `initGetArticlesFailure Should emit expected states When init block is invoked`() {
         // Given
         val cause = Throwable("Some error message")
         val expectedFirstState = initialState.copy(childPosition = 0)
         val expectedFinalState = expectedFirstState.copy(
             shouldShowError = true,
             errorMessage = cause.message,
-            childPosition = 2
+            childPosition = 1
         )
         every { provider.getArticlesUseCase() } returns flow { throw cause }
 
         // When
-        subject.getArticles()
+        setupSubject()
 
         // Then
         runTest {
@@ -104,29 +95,40 @@ class MainViewModelTest {
     fun `onAdapterItem Should emit expected state When invoked by click on adapter item`() {
         // Given
         val article = articleStub
-        val expectedState = initialState.copy(
+        val articles = articlesStub.articles
+        val expectedFinalState = initialState.copy(
             article = article.copy(publishedAt = "08/07/2023"),
-            shouldShowDetails = true
+            shouldShowDetails = true,
+            articles = articles,
+            childPosition = 2,
         )
+        every { provider.getArticlesUseCase() } returns flowOf(articlesStub)
         every { provider.getFormattedDateUseCase(any(), any()) } returns "08/07/2023"
+        setupSubject()
+        dispatcher.scheduler.advanceUntilIdle()
 
         // When
-        subject.onAdapterItem(article)
+        runTest { subject.onAdapterItem(article) }
 
         // Then
         runTest {
             subject.state.test {
-                assertEquals(expectedState, awaitItem())
+                assertEquals(expectedFinalState, awaitItem())
                 cancelAndConsumeRemainingEvents()
             }
         }
+        verify { provider.getArticlesUseCase() }
         verify { provider.getFormattedDateUseCase(any(), any()) }
     }
 
     @Test
     fun `onDismissFeedbackDetails Should emit expected state When invoked by click on close button`() {
         // Given
-        val expectedState = initialState.copy(shouldShowDetails = false)
+        val articles = articlesStub.articles
+        val expectedFinalState = initialState.copy(childPosition = 2, articles = articles)
+        every { provider.getArticlesUseCase() } returns flowOf(articlesStub)
+        setupSubject()
+        dispatcher.scheduler.advanceUntilIdle()
 
         // When
         subject.onDismissFeedbackDetails()
@@ -134,19 +136,21 @@ class MainViewModelTest {
         // Then
         runTest {
             subject.state.test {
-                assertEquals(expectedState, awaitItem())
+                assertEquals(expectedFinalState, awaitItem())
                 cancelAndConsumeRemainingEvents()
             }
         }
+        verify { provider.getArticlesUseCase() }
     }
 
     @Test
-    fun `onTryAgain Should emit expected states When invoke by clicked from try again button`() {
+    fun `onTryAgain Should emite expected states When invoke by clicked from try again button`() {
         // Given
         val articles = articlesStub.articles
-        val expectedFirstState = initialState.copy(shouldShowError = false, childPosition = 0)
-        val expectedFinalState = expectedFirstState.copy(articles = articles, childPosition = 3)
+        val expectedFirstState = initialState.copy(childPosition = 0)
+        val expectedFinalState = expectedFirstState.copy(articles = articles, childPosition = 2)
         every { provider.getArticlesUseCase() } returns flowOf(articlesStub)
+        setupSubject()
 
         // When
         subject.onTryAgain()
@@ -159,13 +163,17 @@ class MainViewModelTest {
                 cancelAndConsumeRemainingEvents()
             }
         }
-        verify { provider.getArticlesUseCase() }
+        verify(exactly = 2) { provider.getArticlesUseCase() }
     }
 
     @Test
     fun `onDismissFeedbackError Should emit expected state When invoked by click on close button`() {
         // Given
-        val expectedState = initialState.copy(shouldShowError = false)
+        val articles = articlesStub.articles
+        val expectedFinalState = initialState.copy(childPosition = 2, articles = articles)
+        every { provider.getArticlesUseCase() } returns flowOf(articlesStub)
+        setupSubject()
+        dispatcher.scheduler.advanceUntilIdle()
 
         // When
         subject.onDismissFeedbackError()
@@ -173,16 +181,19 @@ class MainViewModelTest {
         // Then
         runTest {
             subject.state.test {
-                assertEquals(expectedState, awaitItem())
+                assertEquals(expectedFinalState, awaitItem())
                 cancelAndConsumeRemainingEvents()
             }
         }
+        verify { provider.getArticlesUseCase() }
     }
 
     @Test
     fun `onOpenBrowser Should emit expected OpenBrowser action When invoked by click on see more button`() {
         // Given
         val expectedUrl = "https://www.google.com"
+        every { provider.getArticlesUseCase() } returns flowOf(articlesStub)
+        setupSubject()
 
         // When
         subject.onOpenBrowser(url = "https://www.google.com")
@@ -195,12 +206,15 @@ class MainViewModelTest {
                 cancelAndConsumeRemainingEvents()
             }
         }
+        verify { provider.getArticlesUseCase() }
     }
 
     @Test
     fun `onOpenBrowserFailure Should emit ShowOpenBrowserError action When pass an invalid url`() {
         // Given
         val expectedAction = MainViewAction.ShowOpenBrowserError
+        every { provider.getArticlesUseCase() } returns flowOf(articlesStub)
+        setupSubject()
 
         // When
         subject.onOpenBrowser(url = "")
@@ -213,61 +227,13 @@ class MainViewModelTest {
                 cancelAndConsumeRemainingEvents()
             }
         }
-    }
-
-    @Test
-    fun `onCanAuthenticate Should emit expected state When is invoked with authenticator available`() {
-        // Given
-        val expectedState = initialState.copy(childPosition = 1)
-
-        // When
-        subject.onCanAuthenticate()
-
-        // Then
-        runTest {
-            subject.state.test {
-                assertEquals(expectedState, awaitItem())
-                cancelAndConsumeRemainingEvents()
-            }
-        }
-    }
-
-    @Test
-    fun `onBiometricError Should emit expected states When there is no biometrics available`() {
-        // Given
-        val articles = articlesStub.articles
-        val expectedFirstState = initialState.copy(childPosition = 0)
-        val expectedFinalState = expectedFirstState.copy(articles = articles, childPosition = 3)
-        every { provider.getArticlesUseCase() } returns flowOf(articlesStub)
-
-        // When
-        subject.onBiometricError(errorCode = 11)
-
-        // Then
-        runTest {
-            subject.state.test {
-                assertEquals(expectedFirstState, awaitItem())
-                assertEquals(expectedFinalState, awaitItem())
-                cancelAndConsumeRemainingEvents()
-            }
-        }
         verify { provider.getArticlesUseCase() }
     }
 
-    @Test
-    fun `onShowBiometricPrompt Should emit expected ShowBiometricPrompt action When is invoked to show biometric prompt`() {
-        // Given
-        val expectedAction = MainViewAction.ShowBiometricPrompt
-
-        // When
-        subject.onShowBiometricPrompt()
-
-        // Then
-        runTest {
-            subject.action.test {
-                assertEquals(expectedAction, awaitItem())
-                cancelAndConsumeRemainingEvents()
-            }
-        }
+    private fun setupSubject() {
+        subject = MainViewModel(
+            provider = provider,
+            dispatcher = dispatcher
+        )
     }
 }

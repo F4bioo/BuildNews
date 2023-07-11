@@ -12,6 +12,7 @@ object Libs {
     const val swipeRefresh = "androidx.swiperefreshlayout:swiperefreshlayout:${Versions.swipeRefresh_version}"
     const val pagingRuntime = "androidx.paging:paging-runtime:${Versions.pagingRuntime_version}"
     const val pagingRxJava2 = "androidx.paging:paging-rxjava2:${Versions.pagingRuntime_version}"
+    const val biometric = "androidx.biometric:biometric:${Versions.biometric_version}"
 
     // Kotlin
     const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines_version}"

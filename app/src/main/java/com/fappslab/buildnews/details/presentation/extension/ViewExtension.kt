@@ -66,7 +66,7 @@ fun FragmentActivity.showFeedbackDetails(
     }.build(shouldShow, supportFragmentManager, FEEDBACK_DETAILS_TAG)
 }
 
-fun AppCompatActivity.showErrorBuyBookAction() {
+fun AppCompatActivity.showErrorSeeMoreAction() {
     Toast.makeText(this, getString(R.string.error_open_browser), Toast.LENGTH_LONG).show()
 }
 

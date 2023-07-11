@@ -4,7 +4,6 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -20,7 +19,7 @@ abstract class ViewModel<S, A>(
     val state: StateFlow<S> = _state.asStateFlow()
 
     private val _action = MutableSharedFlow<A>()
-    val action: SharedFlow<A> = _action.asSharedFlow()
+    val action: Flow<A> = _action.asSharedFlow()
 
     protected fun onState(stateBlock: (S) -> S) {
         _state.update { stateBlock(it) }

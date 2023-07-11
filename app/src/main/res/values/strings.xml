@@ -3,4 +3,9 @@
     <string name="error_open_browser">Sorry, this article is unavailable.</string>
     <string name="see_more">See more</string>
     <string name="published_date">Published date: %s</string>
+    <string name="fingerprint_title">Welcome to %s App</string>
+    <string name="fingerprint_subtitle">Your headlines in one click</string>
+    <string name="fingerprint_description">Access the latest %s headlines and dive deeper into the stories that matter to you.</string>
+    <string name="verify_your_identity">To continue exploring the top headlines, please verify your identity.</string>
+    <string name="verify_identity">Verify Identity</string>
 </resources>

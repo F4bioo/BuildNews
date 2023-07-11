@@ -1,5 +1,6 @@
 package com.fappslab.buildnews.main.presentation.viewmodel
 
+import androidx.biometric.BiometricPrompt
 import androidx.lifecycle.viewModelScope
 import com.fappslab.buildnews.BuildConfig
 import com.fappslab.buildnews.common.domain.model.Articles.Article
@@ -19,16 +20,12 @@ class MainViewModel(
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : ViewModel<MainViewState, MainViewAction>(MainViewState()) {
 
-    init {
-        getBooks()
-    }
-
-    private fun getBooks() {
+    fun getArticles() {
         provider.getArticlesUseCase()
             .flowOn(dispatcher)
             .onStart { onState { it.copy(childPosition = LOADING_CHILD) } }
-            .catch { cause -> onState { it.getBooksFailure(cause.message) } }
-            .onEach { articles -> onState { it.getBooksSuccess(articles) } }
+            .catch { cause -> onState { it.getArticlesFailure(cause.message) } }
+            .onEach { articles -> onState { it.getArticlesSuccess(articles) } }
             .launchIn(viewModelScope)
     }
 
@@ -47,7 +44,7 @@ class MainViewModel(
 
     fun onTryAgain() {
         onDismissFeedbackError()
-        getBooks()
+        getArticles()
     }
 
     fun onDismissFeedbackError() {
@@ -60,6 +57,20 @@ class MainViewModel(
         } else MainViewAction.ShowOpenBrowserError
 
         onAction { action }
+    }
+
+    fun onCanAuthenticate() {
+        onState { it.copy(childPosition = BIOMETRIC_CHILD) }
+    }
+
+    fun onBiometricError(errorCode: Int) {
+        when (errorCode) {
+            BiometricPrompt.ERROR_NO_BIOMETRICS -> getArticles()
+        }
+    }
+
+    fun onShowBiometricPrompt() {
+        onAction { MainViewAction.ShowBiometricPrompt }
     }
 
     private fun isValidUrl(url: String): Boolean =

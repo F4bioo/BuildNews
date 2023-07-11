@@ -79,6 +79,7 @@ android {
 dependencies {
     // Libs
     implementation(Libs.shimmer)
+    implementation(Libs.biometric)
 
     // Modules
     implementation project(Modules.arch)
