@@ -45,20 +45,68 @@ The application is built using the following technologies:
 - **Local Database:** Room <del>(Not Yet Implemented)</del>
 - **Paging:** Paging 3 <del>(Not Yet Implemented)</del>
 
-## How to Build
+Here is the updated step-by-step guide to include new flavor addition:
 
-To build this project, you will need to generate your API key from NewsAPI and NYTimesAPI and include them in your project:
+# How to Build
 
-1. Generate your API keys from [NewsAPI](https://newsapi.org/) and [NYTimesAPI](https://developer.nytimes.com/get-started).
+To build this project, you will need to generate your API key from NewsAPI, NYTimesAPI and for any other flavors you plan to add, and include them in your project:
+
+1. Generate your API keys from NewsAPI, NYTimesAPI and other APIs you intend to use.
 2. Create a file named `api_keys.properties` in the project root directory.
 3. Add the following lines to the file:
-    ```
-    NEWS_API_KEY="Your-Api-Key-Here"
-    NY_TIMES_API_KEY="Your-Api-Key-Here"
-    ```
-4. Replace `Your-NewsAPI-Key-Here` and `Your-NYTimesAPI-Key-Here` with your actual API keys.
+   ```
+   NEWS_API_KEY="Your-NewsAPI-Key-Here"
+   NY_TIMES_API_KEY="Your-NYTimesAPI-Key-Here"
+   YOUR_FLAVOR_API_KEY="Your-FlavorAPI-Key-Here"
+   ```
+   Replace `Your-NewsAPI-Key-Here`, `Your-NYTimesAPI-Key-Here` and `Your-FlavorAPI-Key-Here` with your actual API keys.
 
 Then you can clone this repository and import into Android Studio to build the application.
+
+# How to add a new Flavor
+
+To add a new flavor to this project, follow these steps:
+
+1. Open the `flavor-build.gradle` file and add your flavor details inside the `productFlavors` block. Here's an example of what you should add:
+
+   ```
+   yourflavor {
+       dimension "app"
+       ext.appIdSuffix = '.yourflavorapi'
+       manifestPlaceholders = [appName: "Your Flavor"]
+       buildConfigField 'String', 'QUERY_PARAM', '"apiKey"'
+       buildConfigField 'String', 'BASE_URL', '"https://yourflavorapi.com/"'
+       buildConfigField "String", "API_KEY", keyApiProperties['YOUR_FLAVOR_API_KEY']
+   }
+   ```
+
+2. Add a `sourceSet` for your flavor:
+
+   ```
+   sourceSets {
+       yourflavor {
+           res.srcDirs file("$rootDir/flavors/yourflavor/src/main/res")
+       }
+   }
+   ```
+
+3. Create a new module for your flavor with the name `yourflavorapi`. In the `build.gradle` of the new module, add the following:
+
+   ```
+   android {
+       ...
+       flavorDimensions "app"
+       productFlavors {
+           yourflavorapi {
+               dimension "app"
+           }
+       }
+   }
+   ```
+
+4. Finally, ensure that you have added the corresponding API key for your flavor in the `api_keys.properties` file as instructed in the Build section.
+
+After these steps, the new flavor will be ready to use. You can now build and run your application with the new flavor.
 
 ## Screens
 <img src="images/newsapi.png" width="100%"/>
