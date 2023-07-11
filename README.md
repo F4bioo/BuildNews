@@ -55,7 +55,6 @@ To build this project, you will need to generate your API key from NewsAPI and N
     ```
     NEWS_API_KEY="Your-Api-Key-Here"
     NY_TIMES_API_KEY="Your-Api-Key-Here"
-
     ```
 4. Replace `Your-NewsAPI-Key-Here` and `Your-NYTimesAPI-Key-Here` with your actual API keys.
 
