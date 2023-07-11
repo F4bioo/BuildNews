@@ -159,10 +159,7 @@ class DsFeedbackModal : BottomSheetDialogFragment(R.layout.ds_feedback_modal) {
             buttonTextRes?.let(::setText)
             buttonText?.let { text = it }
             isVisible = shouldShow(pairData = buttonTextRes to buttonText)
-            setOnClickListener {
-                primaryButtonAction?.invoke()
-                dismissAllowingStateLoss()
-            }
+            setOnClickListener { primaryButtonAction?.invoke() }
         }
     }
 
@@ -171,10 +168,7 @@ class DsFeedbackModal : BottomSheetDialogFragment(R.layout.ds_feedback_modal) {
             buttonTextRes?.let(::setText)
             buttonText?.let { text = it }
             isVisible = shouldShow(pairData = buttonTextRes to buttonText)
-            setOnClickListener {
-                secondaryButtonAction?.invoke()
-                dismissAllowingStateLoss()
-            }
+            setOnClickListener { secondaryButtonAction?.invoke() }
         }
     }
 

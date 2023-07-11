@@ -60,7 +60,10 @@ fun FragmentActivity.showFeedbackDetails(
         }
         secondaryButton = {
             buttonTextRes = DS.string.common_close
-            buttonAction = dismissAction
+            buttonAction = {
+                dismissAction()
+                dismiss()
+            }
         }
         shouldBlock = true
     }.build(shouldShow, supportFragmentManager, FEEDBACK_DETAILS_TAG)
