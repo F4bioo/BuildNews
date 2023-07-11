@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true">
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/placeholder"
+        app:layout_constraintBottom_toBottomOf="@id/image_cover"
+        app:layout_constraintEnd_toEndOf="@id/image_cover"
+        app:layout_constraintStart_toStartOf="@id/image_cover"
+        app:layout_constraintTop_toTopOf="@id/image_cover" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/image_cover"
+        style="@style/DsImageAvatar"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/ds_size_28"
+        android:layout_margin="@dimen/ds_size_02"
+        android:importantForAccessibility="no"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeColor="@color/ds_charcoal" />
+
+    <TextView
+        android:id="@+id/text_title"
+        style="@style/DsTextMedium"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/ds_size_02"
+        android:ellipsize="end"
+        android:maxLines="3"
+        app:layout_constraintBottom_toTopOf="@id/view"
+        app:layout_constraintEnd_toEndOf="@id/image_cover"
+        app:layout_constraintStart_toStartOf="@id/image_cover"
+        app:layout_constraintTop_toBottomOf="@id/image_cover"
+        tools:text="@tools:sample/lorem/random" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/ds_divider"
+        android:background="@color/ds_charcoal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

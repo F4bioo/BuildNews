@@ -1,0 +1,32 @@
+{
+  "status": "ok",
+  "totalResults": 33,
+  "articles": [
+    {
+      "source": {
+        "id": null,
+        "name": "The Athletic"
+      },
+      "author": "Jason Quick",
+      "title": "Scoot Henderson suffers injury in Trail Blazers’ debut, but not before making a ‘statement’ - The Athletic",
+      "description": "\"His superpower is his speed and his explosiveness,\" Blazers coach Chauncey Billups said. \"I thought he did a really good job.\"",
+      "url": "https://theathletic.com/4675374/2023/07/08/scoot-henderson-injury-trail-blazers/",
+      "urlToImage": "https://cdn.theathletic.com/app/uploads/2023/07/08002541/230707-Scoot-scaled.jpg",
+      "publishedAt": "2023-07-08T14:58:45Z",
+      "content": "LAS VEGAS As first quarters go in a Summer League debut, it didnt get much better than what Sterling Scoot Henderson unveiled Friday for the Trail Blazers.\r\nA point guard who is built like a lineback… [+4701 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "POLITICO.eu"
+      },
+      "author": "Mathieu Pollet",
+      "title": "Spain and UK warn against sending cluster bombs to Ukraine - POLITICO Europe",
+      "description": "US decision to send the weapons has raised humanitarian concerns.",
+      "url": "https://www.politico.eu/article/spain-and-uk-warn-against-sending-cluster-bombs-to-ukraine-russia-war/",
+      "urlToImage": "https://www.politico.eu/cdn-cgi/image/width=1200,height=630,fit=crop,quality=80,onerror=redirect/wp-content/uploads/2023/07/08/GettyImages-1247127018-scaled.jpg",
+      "publishedAt": "2023-07-08T14:44:05Z",
+      "content": "Madrid and London do not look kindly on the American decision to send cluster bombs to Ukraine.\r\nThe Biden administration announced on Friday that the weapons will be included in the U.S.’s next $800… [+1814 chars]"
+    }
+  ]
+}

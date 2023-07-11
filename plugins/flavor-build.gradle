@@ -1,0 +1,37 @@
+ext.flavorConfig = {
+
+    flavorDimensions "app"
+    productFlavors {
+        newsapi {
+            dimension "app"
+            ext.appIdSuffix = '.newsapi'
+            manifestPlaceholders = [appName: "BBC News"]
+        }
+        nytimesapi {
+            dimension "app"
+            ext.appIdSuffix = '.nytimesapi'
+            manifestPlaceholders = [appName: "The New York Times"]
+        }
+    }
+
+    sourceSets {
+        newsapi {
+            res.srcDirs file("$rootDir/flavors/newsapi/src/main/res")
+        }
+        nytimesapi {
+            res.srcDirs file("$rootDir/flavors/nytimesapi/src/main/res")
+        }
+    }
+
+    productFlavors.all { flavor ->
+        if (flavor.hasProperty('appIdSuffix') && isApplicationProject()) {
+            flavor.applicationIdSuffix = flavor.appIdSuffix
+        }
+    }
+}
+
+def isApplicationProject() {
+    return project.android.class.simpleName.startsWith('BaseAppModuleExtension')
+    // in AGP 3.1.x with library modules instead of feature modules:
+    // return project.android instanceof com.android.build.gradle.AppExtension
+}

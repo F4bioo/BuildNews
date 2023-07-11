@@ -13,4 +13,10 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "BuildNews"
-include ':app'
+// keep in alphabetical order
+include ':app',
+        ':common',
+        ':flavors:newsapi',
+        ':flavors:nytimesapi',
+        ':libraries:arch',
+        ':libraries:design'

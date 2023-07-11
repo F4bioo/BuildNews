@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="FlavorTheme" parent="AppTheme">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/ds_primary</item>
+        <item name="colorPrimaryVariant">@color/ds_primary</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/ds_primary</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+    </style>
+
+</resources>

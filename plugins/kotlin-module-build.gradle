@@ -1,0 +1,8 @@
+dependencies {
+    // TestLibs
+    testImplementation(TestLibs.junitTest)
+    testImplementation(TestLibs.mockkUnitTest)
+    testImplementation(TestLibs.kotlinTest)
+    testImplementation(TestLibs.coroutinesTest)
+    testImplementation(TestLibs.turbineTest)
+}

@@ -1,44 +1,92 @@
+import io.gitlab.arturbosch.detekt.Detekt
+
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
 }
+apply from: "$rootDir/plugins/android-build.gradle"
+apply from: "$rootDir/plugins/flavor-build.gradle"
+apply from: "$rootDir/config/detekt/detekt-build.gradle"
+apply from: "$rootDir/plugins/jacoco-build.gradle"
+
+def keyApiPropertiesFile = rootProject.file("$rootDir/keyApi.properties")
+def keyApiProperties = new Properties()
+keyApiProperties.load(new FileInputStream(keyApiPropertiesFile))
 
 android {
-    namespace 'com.fappslab.buildnews'
-    compileSdk 33
+    namespace Config.namespace
+
+    signingConfigs {
+        release {
+            // Implements keyStore for release version
+        }
+    }
 
     defaultConfig {
-        applicationId "com.fappslab.buildnews"
-        minSdk 28
-        targetSdk 33
-        versionCode 1
-        versionName "1.0"
+        applicationId Config.applicationId
+        versionCode Config.versionCode
+        versionName Config.versionName
+    }
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    with flavorConfig
+    productFlavors {
+        newsapi {
+            buildConfigField 'String', 'BASE_URL', '"https://newsapi.org/"'
+            buildConfigField "String", "API_KEY", keyApiProperties['NEWS_API_KEY']
+        }
+        nytimesapi {
+            buildConfigField 'String', 'BASE_URL', '"https://api.nytimes.com/"'
+            buildConfigField "String", "API_KEY", keyApiProperties['NY_TIMES_API_KEY']
+        }
     }
 
     buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        debug {
+            debuggable true
+            applicationIdSuffix '.debug'
         }
-    }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        preprod {
+            initWith debug
+            minifyEnabled true
+            applicationIdSuffix '.preprod'
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'),
+                    "$rootDir/app/proguard-rules.pro",
+                    "$rootDir/app/proguard-rules-preprod.pro"
+        }
+        release {
+            minifyEnabled true
+            shrinkResources true
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'),
+                    "$rootDir/app/proguard-rules.pro",
+                    "$rootDir/app/proguard-rules-preprod.pro"
+        }
     }
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    tasks.withType(Detekt).configureEach { detekt ->
+        detekt.reports {
+            xml.required.set(false)
+            html.required.set(true)
+            txt.required.set(false)
+            sarif.required.set(false)
+            md.required.set(false)
+        }
+    }
 }
 
 dependencies {
-    implementation 'androidx.core:core-ktx:1.8.0'
-    implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.5.0'
+    // Libs
+    implementation(Libs.shimmer)
+    implementation(Libs.biometric)
 
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    // Modules
+    implementation project(Modules.arch)
+    implementation project(Modules.design)
+    implementation project(Modules.common)
+
+    // Flavors
+    newsapiImplementation project(Modules.newsApi)
+    nytimesapiImplementation project(Modules.nyTimesApi)
 }

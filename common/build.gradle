@@ -1,0 +1,20 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+}
+apply from: "$rootDir/plugins/android-build.gradle"
+
+android {
+    namespace "${Config.applicationId}.common"
+
+}
+
+dependencies {
+    // Libs
+    api(Libs.retrofitConverterGson)
+    implementation(Libs.jodaTime)
+
+    // Modules
+    implementation project(Modules.arch)
+    implementation project(Modules.design)
+}
