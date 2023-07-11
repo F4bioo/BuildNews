@@ -2,7 +2,7 @@ package com.fappslab.buildnews.di
 
 
 import com.fappslab.buildnews.common.domain.repository.BuildNewsRepository
-import com.fappslab.buildnews.data.api.BuildNewsService
+import com.fappslab.buildnews.data.api.NewsApiService
 import com.fappslab.buildnews.data.repository.BuildNewsRepositoryImpl
 import com.fappslab.buildnews.data.source.BuildNewsDataSourceImpl
 import com.fappslab.buildnews.libraries.arch.koinload.KoinLoad
@@ -17,7 +17,7 @@ object FlavorModule : KoinLoad() {
             BuildNewsRepositoryImpl(
                 dataSource = BuildNewsDataSourceImpl(
                     service = get<HttpClient>().create(
-                        clazz = BuildNewsService::class.java
+                        clazz = NewsApiService::class.java
                     )
                 )
             )

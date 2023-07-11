@@ -1,18 +1,16 @@
 package com.fappslab.buildnews.data.model
 
 import com.fappslab.buildnews.common.domain.model.Articles
-import com.fappslab.buildnews.model.NYTimesArticles
-import com.fappslab.buildnews.model.NYTimesArticles.NYTimesArticle
+import com.fappslab.buildnews.common.domain.model.Articles.Article
 import com.fappslab.buildnews.libraries.arch.extension.orDash
 import com.google.gson.annotations.SerializedName
 
-data class ApiResponse(
-    val numResults: Int?,
+data class ArticlesResponse(
     @SerializedName("results")
-    val results: List<ResultResponse?>?
+    val articles: List<ArticleResponse?>?
 ) {
 
-    data class ResultResponse(
+    data class ArticleResponse(
         @SerializedName("url")
         val url: String?,
         @SerializedName("source")
@@ -42,17 +40,17 @@ data class ApiResponse(
     }
 
     fun toArticles(): Articles {
-        return NYTimesArticles(
-            articles = results?.map { it.toArticle() }.orEmpty()
+        return Articles(
+            articles = articles?.map { it.toArticle() }.orEmpty()
         )
     }
 
-    private fun ResultResponse?.toArticle(): NYTimesArticle {
-        return NYTimesArticle(
+    private fun ArticleResponse?.toArticle(): Article {
+        return Article(
             title = this?.title.orDash(),
             description = this?.abstract.orDash(),
             source = this?.source.orDash(),
-            imageUrl = this?.media?.firstOrNull()?.mediaMetadata?.firstOrNull()?.url.orEmpty(),
+            imageUrl = this?.media?.firstOrNull()?.mediaMetadata?.lastOrNull()?.url.orEmpty(),
             articleUrl = this?.url.orEmpty(),
             publishedAt = this?.publishedDate.orDash()
         )

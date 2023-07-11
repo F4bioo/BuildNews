@@ -4,7 +4,7 @@ import okhttp3.Interceptor
 import okhttp3.Response
 import java.io.IOException
 
-private const val PATH = "?api-key="
+private const val QUERY_PARAM = "api-key"
 
 class ApiKeyInterceptor(
     private val apiKey: String
@@ -15,7 +15,7 @@ class ApiKeyInterceptor(
         val request = chain.request()
         val requestUrl = request.url
         val newUrl = requestUrl.newBuilder()
-            .addPathSegment("$PATH$apiKey")
+            .addQueryParameter(QUERY_PARAM, apiKey)
             .build()
 
         return chain.proceed(

@@ -1,12 +1,11 @@
 package com.fappslab.buildnews.data.model
 
 import com.fappslab.buildnews.common.domain.model.Articles
-import com.fappslab.buildnews.domain.model.NewsArticles
-import com.fappslab.buildnews.domain.model.NewsArticles.NewsApiArticle
+import com.fappslab.buildnews.common.domain.model.Articles.Article
 import com.fappslab.buildnews.libraries.arch.extension.orDash
 import com.google.gson.annotations.SerializedName
 
-data class ApiResponse(
+data class ArticlesResponse(
     @SerializedName("totalResults")
     val totalResults: Int?,
     @SerializedName("articles")
@@ -35,13 +34,13 @@ data class ApiResponse(
     }
 
     fun toArticles(): Articles {
-        return NewsArticles(
+        return Articles(
             articles?.map { it.toArticle() }.orEmpty()
         )
     }
 
-    private fun ArticleResponse?.toArticle(): NewsApiArticle {
-        return NewsApiArticle(
+    private fun ArticleResponse?.toArticle(): Article {
+        return Article(
             title = this?.title.orDash(),
             description = this?.description.orDash(),
             source = this?.source?.name.orDash(),
