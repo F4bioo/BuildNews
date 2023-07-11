@@ -34,7 +34,7 @@ The application leverages two prominent news APIs to fetch the top headlines:
 The application is built using the following technologies:
 
 - **Architecture:** MVVM/MVI with Clean Architecture principles
-- **Languages:** Kotlin with Coroutines for async operations.
+- **Asynchronous programming:** Flow, StateFlow for screen state management, and SharedFlow for single-shot events
 - **Networking:** Retrofit for network calls.
 - **Parsing:** Gson for parsing JSON data.
 - **Image Loading:** Coil for loading and caching images.
