@@ -33,13 +33,14 @@ The application leverages two prominent news APIs to fetch the top headlines:
 
 The application is built using the following technologies:
 
-- **Architecture:** MVVM with Clean Architecture principles.
+- **Architecture:** MVVM/MVI with Clean Architecture principles
 - **Languages:** Kotlin with Coroutines for async operations.
 - **Networking:** Retrofit for network calls.
 - **Parsing:** Gson for parsing JSON data.
 - **Image Loading:** Coil for loading and caching images.
 - **Dependency Injection:** Koin.
 - **Unit Testing:** JUnit, Mockk.
+- **Quality control:** Jacoco for code coverage, Detekt for static code analysis
 - **UI Testing:** Espresso <del>(Not Yet Implemented)</del>
 - **Local Database:** Room <del>(Not Yet Implemented)</del>
 - **Paging:** Paging 3 <del>(Not Yet Implemented)</del>
