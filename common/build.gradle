@@ -12,6 +12,9 @@ android {
 dependencies {
     // Libs
     api(Libs.retrofitConverterGson)
+    implementation(Libs.jodaTime)
+
+    // Modules
     implementation project(Modules.arch)
     implementation project(Modules.design)
 }
