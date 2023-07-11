@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.BuildNews" parent="Theme.Ds" />
+    <style name="AppTheme" parent="Theme.Ds" />
 
     <!-- Base application theme. -->
     <style name="Theme.Ds" parent="Theme.MaterialComponents.DayNight.NoActionBar">
@@ -102,6 +102,22 @@
         <item name="android:textColor">@color/ds_on_secondary</item>
     </style>
 
+    <style name="DsImageIconButton" parent="Widget.AppCompat.ImageButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">?attr/selectableItemBackgroundBorderless</item>
+        <item name="android:padding">@dimen/ds_size_02</item>
+        <item name="tint">@color/ds_gray_light</item>
+    </style>
+
+    <style name="DsImageAvatar" parent="ShapeAppearance.MaterialComponents">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">#13000000</item>
+        <item name="android:scaleType">centerCrop</item>
+        <item name="shapeAppearance">@style/DsImageRounded</item>
+    </style>
+
     <style name="DsImageCircle">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
@@ -109,7 +125,7 @@
 
     <style name="DsImageRounded">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">8%</item>
+        <item name="cornerSize">6%</item>
     </style>
 
     <style name="DsFabRoundedSquare" parent="ShapeAppearance.MaterialComponents.MediumComponent">

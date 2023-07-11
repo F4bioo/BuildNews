@@ -4,16 +4,56 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.fappslab.buildnews.presentation.MainActivity">
+    tools:context="com.fappslab.buildnews.main.presentation.MainActivity">
 
-    <TextView
-        android:id="@+id/text_hello"
-        android:layout_width="wrap_content"
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar_main"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/app_name"
+        android:background="@color/ds_primary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="@string/app_name"
+        app:titleTextColor="@color/ds_white" />
+
+    <ViewFlipper
+        android:id="@+id/flipper_container"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/toolbar_main">
+
+        <include
+            layout="@layout/include_loading"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <include
+            android:id="@+id/include_empty"
+            layout="@layout/include_empty"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_main"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:paddingBottom="@dimen/ds_size_02"
+            android:scrollbars="none"
+            android:splitMotionEvents="false"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar_main"
+            tools:itemCount="3"
+            tools:listitem="@layout/adapter_main_item" />
+
+    </ViewFlipper>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
