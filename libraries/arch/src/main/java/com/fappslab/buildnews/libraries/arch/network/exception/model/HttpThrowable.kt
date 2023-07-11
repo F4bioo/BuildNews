@@ -1,4 +1,4 @@
-package com.fappslab.buildnews.libraries.arch.network.exception
+package com.fappslab.buildnews.libraries.arch.network.exception.model
 
 data class HttpThrowable(
     val code: Int? = null,

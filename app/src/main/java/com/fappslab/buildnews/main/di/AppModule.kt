@@ -5,9 +5,9 @@ import com.fappslab.buildnews.common.data.network.retrofit.HttpClientImpl
 import com.fappslab.buildnews.common.data.network.retrofit.RetrofitClient
 import com.fappslab.buildnews.common.domain.usecase.GetArticlesUseCase
 import com.fappslab.buildnews.common.domain.usecase.GetFormattedDateUseCase
-import com.fappslab.buildnews.data.api.network.ApiKeyInterceptor
 import com.fappslab.buildnews.libraries.arch.koinload.KoinLoad
 import com.fappslab.buildnews.libraries.arch.network.client.HttpClient
+import com.fappslab.buildnews.libraries.arch.network.interceptor.ApiKeyInterceptor
 import com.fappslab.buildnews.libraries.arch.network.interceptor.HeaderInterceptor
 import com.fappslab.buildnews.main.domain.provider.UseCaseProvider
 import com.fappslab.buildnews.main.presentation.viewmodel.MainViewModel
@@ -23,7 +23,10 @@ object AppModule : KoinLoad() {
         single<List<Interceptor>> {
             listOf<Interceptor>(
                 HeaderInterceptor(),
-                ApiKeyInterceptor(BuildConfig.API_KEY)
+                ApiKeyInterceptor(
+                    queryParam = BuildConfig.QUERY_PARAM,
+                    apiKey = BuildConfig.API_KEY
+                )
             )
         }
 

@@ -1,5 +1,6 @@
 package com.fappslab.buildnews.libraries.arch.network.exception
 
+import com.fappslab.buildnews.libraries.arch.network.exception.model.HttpThrowable
 import com.google.gson.Gson
 
 interface ApiError {

@@ -1,8 +1,8 @@
 package com.fappslab.buildnews.libraries.arch.network.exception.extension
 
 import com.fappslab.buildnews.libraries.arch.network.exception.ApiError
-import com.fappslab.buildnews.libraries.arch.network.exception.HttpThrowable
-import com.fappslab.buildnews.libraries.arch.network.exception.InternetThrowable
+import com.fappslab.buildnews.libraries.arch.network.exception.model.HttpThrowable
+import com.fappslab.buildnews.libraries.arch.network.exception.model.InternetThrowable
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import retrofit2.HttpException
