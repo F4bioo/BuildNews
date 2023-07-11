@@ -23,18 +23,16 @@
 
         <ImageButton
             android:id="@+id/button_close"
+            style="@style/DsImageIconButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:layout_margin="@dimen/ds_size_02"
-            android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="@string/common_close"
-            android:padding="@dimen/ds_size_02"
             android:src="@drawable/ds_ic_cancel"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:tint="@color/ds_gray_light" />
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -49,10 +47,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <ImageView
+            <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/image_avatar"
-                android:layout_width="@dimen/ds_size_18"
-                android:layout_height="@dimen/ds_size_18"
+                style="@style/DsImageAvatar"
+                android:layout_width="@dimen/ds_size_32"
+                android:layout_height="@dimen/ds_size_20"
                 android:importantForAccessibility="no"
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"

@@ -8,6 +8,7 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
+import com.fappslab.buildnews.design.extension.loadImage
 import com.fappslab.buildnews.libraries.arch.extension.isNotNull
 import com.fappslab.buildnews.libraries.arch.extension.isNull
 import com.fappslab.buildnews.libraries.arch.viewbinding.viewBinding
@@ -33,6 +34,7 @@ class DsFeedbackModal : BottomSheetDialogFragment(R.layout.ds_feedback_modal) {
 
     @DrawableRes
     var imageRes: Int? = null
+    var imageUrl: String? = null
 
     @StringRes
     var titleRes: Int? = null
@@ -107,10 +109,12 @@ class DsFeedbackModal : BottomSheetDialogFragment(R.layout.ds_feedback_modal) {
 
     private fun setupAvatarImage() {
         binding.imageAvatar.run {
+            imageUrl?.let(::loadImage)
             imageRes?.let(::setImageResource)
-            isVisible = imageRes.isNotNull()
+            isVisible = imageRes.isNotNull() ||
+                    !imageUrl.isNullOrBlank()
         }
-        if (imageRes.isNull()) {
+        if (imageRes.isNull() && imageUrl.isNullOrEmpty()) {
             binding.textTile.run {
                 val layoutParams = this.layoutParams as? ViewGroup.MarginLayoutParams
                 layoutParams?.topMargin = 0
