@@ -5,12 +5,12 @@ ext.flavorConfig = {
         newsapi {
             dimension "app"
             ext.appIdSuffix = '.newsapi'
-            manifestPlaceholders = [appName: "News API"]
+            manifestPlaceholders = [appName: "BBC News"]
         }
         nytimesapi {
             dimension "app"
             ext.appIdSuffix = '.nytimesapi'
-            manifestPlaceholders = [appName: "The New York Times API"]
+            manifestPlaceholders = [appName: "The New York Times"]
         }
     }
 
