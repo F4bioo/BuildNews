@@ -2,7 +2,7 @@ object Versions {
     // Libs versions
     const val coreKtx_version = "1.9.0"
     const val appcompat_version = "1.5.1"
-    const val material_version = "1.7.0"
+    const val material_version = "1.9.0"
     const val constraintLayout_version = "2.1.4"
     const val koin_version = "2.2.3"
     const val lifecycle_version = "2.5.1"
@@ -28,6 +28,8 @@ object Versions {
     const val flipper_version = "0.189.0"
     const val soloader_version = "0.10.4"
     const val leakcanaryAndroid_version = "2.8.1"
+    const val jodaTime_version = "2.10.5"
+    const val apacheCommon_version = "1.7"
 
     // Tests Libs versions
     const val junit_version = "4.13.2"

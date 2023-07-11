@@ -16,7 +16,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.lang.reflect.Modifier
 
 @VisibleForTesting(otherwise = Modifier.PRIVATE)
-class RemoteTestRule(
+class RemoteRule(
     private val modules: List<Module>
 ) : TestWatcher(), KoinTest {
 

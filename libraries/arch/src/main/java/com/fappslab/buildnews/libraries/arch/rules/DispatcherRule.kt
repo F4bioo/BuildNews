@@ -1,6 +1,7 @@
 package com.fappslab.buildnews.libraries.arch.rules
 
 import androidx.annotation.VisibleForTesting
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.StandardTestDispatcher
@@ -12,10 +13,13 @@ import org.junit.runner.Description
 import java.lang.reflect.Modifier
 
 @VisibleForTesting(otherwise = Modifier.PRIVATE)
-@OptIn(ExperimentalCoroutinesApi::class)
-open class MainCoroutineTestRule(
+@ExperimentalCoroutinesApi
+open class DispatcherRule(
     open val testDispatcher: TestDispatcher = StandardTestDispatcher()
 ) : TestWatcher() {
+
+    val scope: CoroutineScope
+        get() = CoroutineScope(context = testDispatcher)
 
     override fun starting(description: Description) {
         super.starting(description)

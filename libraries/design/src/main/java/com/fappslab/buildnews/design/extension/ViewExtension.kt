@@ -12,11 +12,13 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 import coil.load
 import coil.request.CachePolicy
+import com.fappslab.buildnews.libraries.design.R
 
 fun ImageView.loadImage(urlImage: String) {
     load(urlImage) {
         crossfade(enable = true)
         crossfade(durationMillis = 500)
+        error(R.drawable.placeholder)
         memoryCachePolicy(CachePolicy.ENABLED)
     }
 }

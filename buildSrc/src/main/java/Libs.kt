@@ -58,4 +58,6 @@ object Libs {
     // Others
     const val gson = "com.google.code.gson:gson:${Versions.gson_version}"
     const val timber = "com.jakewharton.timber:timber:${Versions.timber_version}"
+    const val jodaTime = "joda-time:joda-time:${Versions.jodaTime_version}"
+    const val apacheCommon = "commons-validator:commons-validator:${Versions.apacheCommon_version}"
 }
